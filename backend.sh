@@ -26,7 +26,7 @@ mkdir /app &>>$log_file
 echo $?
 
 echo -e "${color} Delete old Application Content \e[0m"
-rm -rf /app/* &>>$Log_file
+rm -rf /app/* &>>$log_file
 echo $?
 
 echo -e "${color}Download Application Content \e[0m"
