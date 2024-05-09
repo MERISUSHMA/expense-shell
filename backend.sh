@@ -1,5 +1,5 @@
-log_file="/tmp/expense.log"
-color="\e[33m"
+source common.sh
+
 if [ -z "$1" ]; then
   echo Password Input Missing
   exit
@@ -9,19 +9,19 @@ MYSQL_ROOT_PASSWORD=$1
 
 echo -e "${color} Disable NodeJS default Version \e[0m"
 dnf module disable nodejs -y &>>$log_file
-echo $?
+status_check
 
 echo -e "${color} Enable NodeJS 18 Version \e[0m"
 dnf module enable nodejs:18 -y &>>$log_file
-echo $?
+status_check
 
 echo -e "${color}Install NodeJS \e[0m"
 dnf install nodejs -y &>>$log_file
-echo $?
+status_check
 
 echo -e "${color} Copy Backend Service File \e[0m"
 cp backend.service /etc/systemd/system/backend.service &>>$log_file
-echo $?
+status_check
 
 id expense &>>log_file
 if  [ $? -ne 0 ]; then
@@ -33,11 +33,11 @@ if [ ! -d /app ]; then
 echo -e "${color} Create Application Directory \e[0m"
 mkdir /app &>>$log_file
 fi
-echo $?
+status_check
 
 echo -e "${color} Delete old Application Content \e[0m"
 rm -rf /app/* &>>$log_file
-echo $?
+status_check
 
 echo -e "${color}Download Application Content \e[0m"
 curl -o /tmp/backend.zip https://expense-artifacts.s3.amazonaws.com/backend.zip &>>$log_file
