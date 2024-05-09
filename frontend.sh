@@ -24,6 +24,6 @@ status_check
 echo -e "\e[36m Start Nginx Service \e[0m"
 systemctl enable nginx &>>$log_file
 systemctl restart nginx &>>$log_file
-status_check
+echo $?
 
 
