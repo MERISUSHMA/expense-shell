@@ -41,30 +41,30 @@ status_check
 
 echo -e "${color}Download Application Content \e[0m"
 curl -o /tmp/backend.zip https://expense-artifacts.s3.amazonaws.com/backend.zip &>>$log_file
-echo $?
+status_check
 
 echo -e "${color} Extract Application Content \e[0m"
 cd /app &>>$log_file
 unzip /tmp/backend.zip &>>$log_file
-echo $?
+status_check
 
 echo -e "${color} Download NodeJS Dependencies \e[0m"
 npm install &>>$log_file
-echo $?
+status_check
 
 echo -e "${color} Install MySQL Client to Load Schema \e[0m"
 dnf install mysql -y &>>$log_file
-echo $?
+status_check
 
 echo -e "${color} Load Schema \e[0m"
 mysql -h mysql-dev.sushmadevops.online -uroot -p${MYSQL_ROOT_PASSWORD} < /app/schema/backend.sql &>>$log_file
-echo $?
+status_check
 
 echo -e "${color} Starting Backend Service \e[0m"
 systemctl daemon-reload &>>$log_file
 systemctl enable backend &>>$log_file
 systemctl restart backend &>>$log_file
-echo $?
+status_check
 
 
 
