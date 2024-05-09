@@ -23,9 +23,10 @@ echo -e "${color}Add Application User \e[0m"
 fi
 useradd expense &>>$log_file
 
-
+if [ -d /app ]; then
 echo -e "${color} Create Application Directory \e[0m"
 mkdir /app &>>$log_file
+fi
 echo $?
 
 echo -e "${color} Delete old Application Content \e[0m"
