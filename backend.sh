@@ -1,6 +1,8 @@
 log_file="/tmp/expense.log"
 color="\e[33m"
 
+MYSQL_ROOT_PASSWORD=$1
+
 echo -e "${color} Disable NodeJS default Version \e[0m"
 dnf module disable nodejs -y &>>$log_file
 echo $?
