@@ -20,6 +20,7 @@ echo $?
 id expense &>>log_file
 if  [ $? -ne 0 ]; then
 echo -e "${color}Add Application User \e[0m"
+fi
 useradd expense &>>$log_file
 
 
