@@ -1,5 +1,4 @@
 source common.sh
-
 if [ -z "$1" ]; then
   echo Password Input Missing
   exit
